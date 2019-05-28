@@ -1,6 +1,6 @@
 {
   "name": "k8ss",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "k8s switcher",
   "main": "lib/index.js",
   "directories": {
@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/Jeff-Tian/k8ss#readme",
   "dependencies": {
+    "rimraf": "^2.6.3",
     "shelljs": "^0.8.3",
     "yargs": "^13.2.4"
   },
