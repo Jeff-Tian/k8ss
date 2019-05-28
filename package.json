@@ -1,11 +1,12 @@
 {
   "name": "k8ss",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "k8s switcher",
-  "main": "libe/index.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib"
   },
+  "bin": "lib/index.js",
   "scripts": {
     "start": "ts-node src/index.ts switch --cluster=hello --namespace=world",
     "build": "tsc",
