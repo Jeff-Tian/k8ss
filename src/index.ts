@@ -1,22 +1,23 @@
-import { Argv } from 'yargs';
 import fs from 'fs';
-import * as path from 'path';
 import * as os from 'os';
+import * as path from 'path';
 import rimraf from 'rimraf';
 import shelljs from 'shelljs';
+import { Argv } from 'yargs';
 
+// tslint:disable-next-line
 require('yargs').command(
   'switch',
   'switch clusters and namespace',
   (yargs: Argv) => {
     yargs
       .option('cluster', {
-        describe: 'cluster name to switch',
         default: 'k8s-non-prod-hangzhou',
+        describe: 'cluster name to switch',
       })
       .option('namespace', {
-        describe: 'namespace to switch',
         default: 'dev',
+        describe: 'namespace to switch',
       });
   },
   (args: any) => {
