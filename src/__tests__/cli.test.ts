@@ -11,7 +11,7 @@ test('cli starts', async () => {
       cwd: path.resolve(__dirname, '../../'),
     })
     .expect('stdout', /^switching to  hello world .../)
-    .expect('stderr', '没有找到目标文件： /Users/jefftian/k8s-config/hello/config\n')
+    .expect('stderr', /^没有找到目标文件：/)
     .expect('code', 1)
     .end();
 });

@@ -56,8 +56,11 @@ require('yargs').command(
     console.log('copied from ', sourceConfig, ' to ', targetConfig);
 
     console.log('will switching context...', namespace);
+    const currentContext = shelljs.exec('kubectl config current-context');
+
+    console.log('current context = ', currentContext);
     const output = shelljs.exec(
-      'kubectl config set-context $(kubectl config current-context)' + ' --namespace=' + namespace,
+      'kubectl config set-context' + currentContext + ' --namespace=' + namespace,
     );
     console.log('switched result: ');
     console.log(output.stdout);
