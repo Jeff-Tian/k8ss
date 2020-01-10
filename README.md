@@ -6,6 +6,8 @@
 [![Build Status](https://travis-ci.com/Jeff-Tian/k8ss.svg?branch=master)](https://travis-ci.com/Jeff-Tian/k8ss)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Jeff-Tian_k8ss)](https://sonarcloud.io/dashboard?id=Jeff-Tian_k8ss)
+
 ## Prerequisites
 
 - `kubectl` installed
