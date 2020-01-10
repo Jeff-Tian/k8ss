@@ -8,7 +8,7 @@
   },
   "bin": "lib/index.js",
   "scripts": {
-    "start": "ts-node src/index.ts s --version",
+    "start": "ts-node src/index.ts --version",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint --fix -p tsconfig.json",
