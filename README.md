@@ -31,7 +31,11 @@ npm install k8ss --global
 ## Usage
 
 ```shell
+# full usage:
 k8ss switch --cluster=hangzhou --namespace=test
+
+# switch namespace only without change cluster:
+k8ss s --namespace=stage
 ```
 
 ## How
