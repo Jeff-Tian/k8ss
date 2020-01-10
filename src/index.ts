@@ -9,12 +9,12 @@ import { Argv } from 'yargs';
 
 // tslint:disable-next-line
 require('yargs').command(
-  'switch',
+  ['switch', 's'],
   'switch clusters and namespace',
   (yargs: Argv) => {
     yargs
       .option('cluster', {
-        default: 'k8s-non-prod-hangzhou',
+        default: '',
         describe: 'cluster name to switch',
       })
       .option('namespace', {
@@ -23,37 +23,39 @@ require('yargs').command(
       });
   },
   (args: any) => {
-    console.log('switching to ', args.cluster, args.namespace, '...');
+    console.log(`switching to --cluster=${args.cluster} --namespace=${args.namespace}...`);
     const { cluster, namespace } = args;
 
-    const source = path.resolve(os.homedir(), 'k8s-config');
-    const sourceConfig = path.resolve(source, cluster, 'config');
-    console.log('will copy ', sourceConfig);
+    if (cluster) {
+      const source = path.resolve(os.homedir(), 'k8s-config');
+      const sourceConfig = path.resolve(source, cluster, 'config');
+      console.log('will copy ', sourceConfig);
 
-    if (!fs.existsSync(sourceConfig)) {
-      console.error('没有找到目标文件：', sourceConfig);
-      process.exit(1);
-    }
-
-    const kubeFolder = path.resolve(os.homedir(), '.kube');
-    const kubeBackupFolder = path.resolve(os.homedir(), '.kube.bak');
-
-    if (fs.existsSync(kubeFolder)) {
-      if (fs.existsSync(kubeBackupFolder)) {
-        rimraf.sync(kubeBackupFolder);
-        console.log('deleted ', kubeBackupFolder);
+      if (!fs.existsSync(sourceConfig)) {
+        console.error('没有找到目标文件：', sourceConfig);
+        process.exit(1);
       }
 
-      fs.renameSync(kubeFolder, kubeBackupFolder);
-      console.log('backed up ~/.kube to ~/.kube.bak');
+      const kubeFolder = path.resolve(os.homedir(), '.kube');
+      const kubeBackupFolder = path.resolve(os.homedir(), '.kube.bak');
+
+      if (fs.existsSync(kubeFolder)) {
+        if (fs.existsSync(kubeBackupFolder)) {
+          rimraf.sync(kubeBackupFolder);
+          console.log('deleted ', kubeBackupFolder);
+        }
+
+        fs.renameSync(kubeFolder, kubeBackupFolder);
+        console.log('backed up ~/.kube to ~/.kube.bak');
+      }
+
+      fs.mkdirSync(kubeFolder, { recursive: true });
+      console.log('created ', kubeFolder);
+
+      const targetConfig = path.resolve(kubeFolder, 'config');
+      fs.copyFileSync(sourceConfig, targetConfig);
+      console.log('copied from ', sourceConfig, ' to ', targetConfig);
     }
-
-    fs.mkdirSync(kubeFolder, { recursive: true });
-    console.log('created ', kubeFolder);
-
-    const targetConfig = path.resolve(kubeFolder, 'config');
-    fs.copyFileSync(sourceConfig, targetConfig);
-    console.log('copied from ', sourceConfig, ' to ', targetConfig);
 
     console.log('will switching context...', namespace);
     const currentContext = shelljs.exec('kubectl config current-context');
