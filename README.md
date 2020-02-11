@@ -30,6 +30,14 @@ npm install k8ss --global
 
 ## Usage
 
+### List all configured clusters
+
+```shell
+k8ss list
+```
+
+### Switch to cluster or namespace
+
 ```shell
 # full usage:
 k8ss switch --cluster=hangzhou --namespace=test

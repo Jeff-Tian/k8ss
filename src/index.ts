@@ -6,6 +6,7 @@ import * as path from 'path';
 import rimraf from 'rimraf';
 import shelljs from 'shelljs';
 import { Argv } from 'yargs';
+import { list } from './list';
 
 // tslint:disable-next-line
 require('yargs')
@@ -76,4 +77,10 @@ require('yargs')
         process.exit(1);
       }
     },
-  ).argv;
+  ).command(['list', 'l'], 'list configured clusters', (yargs: Argv) => {
+    console.log('listing...');
+    console.log(list());
+    console.log('listing end.')
+  }, (args: any) => {
+    console.log('no effect code')
+  }).argv;

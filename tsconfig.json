@@ -6,9 +6,19 @@
     "outDir": "./lib",
     "strict": true,
     "experimentalDecorators": true,
-    "typeRoots": ["./node_modules/@types", "./typings/*"],
-    "esModuleInterop": true
+    "typeRoots": [
+      "./node_modules/@types",
+      "./typings/*"
+    ],
+    "esModuleInterop": true,
+    "allowJs": true
   },
-  "include": ["src", "typings"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+  "include": [
+    "src",
+    "typings"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/__tests__/*"
+  ]
 }

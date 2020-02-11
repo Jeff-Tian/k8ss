@@ -1,5 +1,9 @@
 import coffee from 'coffee';
+import os from 'os';
 import path from 'path';
+import { getSubDirs } from '../list';
+
+jest.setTimeout(7000)
 
 const options = {
   env: {
@@ -29,5 +33,12 @@ test('可以省略 switch 命令', async () => {
   await coffee
     .fork('src/index.ts', ['s', '--namespace=world'], options)
     .expect('stdout', /^switching to --cluster= --namespace=world.../)
+    .end();
+});
+
+test.skip('list', async () => {
+  await coffee
+    .fork('src/index.ts', ['list'], options)
+    .expect('stdout', ['listing...', getSubDirs(path.join(os.homedir(), '/k8s-config')).filter(x => x !== '.git').join('\n'), 'listing end.\n'].join('\n'))
     .end();
 });
