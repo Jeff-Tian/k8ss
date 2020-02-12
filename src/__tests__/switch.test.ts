@@ -1,7 +1,7 @@
 import os from 'os';
 import path from 'path';
 
-test('switch between clusters won\'t affect existing other files', async () => {
+test('switches between clusters and it won\'t affect existing other files', async () => {
     jest.mock('fs');
 
     const fs = require('fs');
@@ -18,12 +18,13 @@ test('switch between clusters won\'t affect existing other files', async () => {
 
     const { switchTo } = require('../switch');
 
-    console.log('configFilePath = ', configFilePath);
-    const config = getConfig();
-    console.log('config = ', config);
-    expect(config).toEqual('config');
+    expect(getConfig()).toEqual('config');
 
     switchTo({ cluster: 'cluster1', namespace: 'name' })
 
     expect(getConfig()).toEqual('cluster1');
+
+    switchTo({ cluster: 'cluster2', namespace: 'name' });
+    expect(getConfig()).toEqual('cluster2');
+    expect(fs.existsSync(path.resolve(os.homedir(), '.kube/file1'))).toBe(true);
 })

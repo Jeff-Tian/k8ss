@@ -1,4 +1,4 @@
-test.skip('list when there is no k8s-config folder under home directory', async () => {
+test('list when there is no k8s-config folder under home directory', async () => {
     jest.mock('fs');
     require('fs').__setMockFiles({
 

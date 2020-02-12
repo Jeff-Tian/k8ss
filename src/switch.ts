@@ -33,8 +33,7 @@ export const switchTo = (args: any) => {
                 console.log('deleted ', kubeBackupFolder);
             }
 
-            fs.renameSync(kubeFolder, kubeBackupFolder);
-            console.log('backed up ~/.kube to ~/.kube.bak');
+            fs.renameSync(path.resolve(kubeFolder, 'config'), path.resolve(kubeBackupFolder, 'config'));
         }
 
         fs.mkdirSync(kubeFolder, { recursive: true });

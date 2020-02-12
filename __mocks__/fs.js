@@ -42,28 +42,15 @@ function readdirSync(directoryPath) {
 fs.__setMockFiles = __setMockFiles;
 fs.readdirSync = readdirSync;
 fs.readFileSync = filePath => fileContents[filePath];
-fs.existsSync = filePath => {
-    __setMockFiles(fileContents);
-
-    const dir = path.resolve(path.dirname(filePath));
-    const files = mockFiles[dir];
-
-    if (!files) {
-        return false
-    }
-
-    const fileName = path.basename(filePath);
-    const filteredFiles = files.filter(x => x === fileName)
-
-    if (filteredFiles.length < 0) {
-        return false
-    }
-
-    return true;
-}
+fs.existsSync = filePath => Object.keys(fileContents).filter(x => x.startsWith(filePath)).length > 0
 fs.renameSync = (from, to) => {
-    fileContents[to] = fileContents[from]
-    delete fileContents[from]
+    for (let path of Object.keys(fileContents)) {
+        if (path.startsWith(from)) {
+            fileContents[path.replace(from, to)] = fileContents[path];
+
+            delete fileContents[path];
+        }
+    }
 }
 fs.makeDirSync = dir => {
     mockFiles[dir] = []
