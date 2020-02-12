@@ -9,7 +9,11 @@ const fs = jest.genMockFromModule('fs');
 // what the files on the "mock" filesystem should look like when any of the
 // `fs` APIs are used.
 let mockFiles = Object.create(null);
+let fileContents = Object.create(null);
+
 function __setMockFiles(newMockFiles) {
+    fileContents = newMockFiles;
+
     mockFiles = Object.create(null);
     for (const file in newMockFiles) {
         const dir = path.dirname(file);
@@ -24,6 +28,8 @@ function __setMockFiles(newMockFiles) {
 // A custom version of `readdirSync` that reads from the special mocked out
 // file list set via __setMockFiles
 function readdirSync(directoryPath) {
+    __setMockFiles(fileContents);
+
     const list = mockFiles[directoryPath]
 
     if (list) {
@@ -35,5 +41,35 @@ function readdirSync(directoryPath) {
 
 fs.__setMockFiles = __setMockFiles;
 fs.readdirSync = readdirSync;
+fs.readFileSync = filePath => fileContents[filePath];
+fs.existsSync = filePath => {
+    __setMockFiles(fileContents);
+
+    const dir = path.resolve(path.dirname(filePath));
+    const files = mockFiles[dir];
+
+    if (!files) {
+        return false
+    }
+
+    const fileName = path.basename(filePath);
+    const filteredFiles = files.filter(x => x === fileName)
+
+    if (filteredFiles.length < 0) {
+        return false
+    }
+
+    return true;
+}
+fs.renameSync = (from, to) => {
+    fileContents[to] = fileContents[from]
+    delete fileContents[from]
+}
+fs.makeDirSync = dir => {
+    mockFiles[dir] = []
+}
+fs.copyFileSync = (from, to) => {
+    fileContents[to] = fileContents[from];
+}
 
 module.exports = fs;

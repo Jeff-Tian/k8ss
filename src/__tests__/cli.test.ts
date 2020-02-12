@@ -17,7 +17,7 @@ test('目标 config 文件不存在的情况', async () => {
   await coffee
     .fork('src/index.ts', ['switch', '--cluster=hello', '--namespace=world'], options)
     .expect('stdout', /^switching to --cluster=hello --namespace=world.../)
-    .expect('stderr', /^没有找到目标文件： .+hello[\/\\]config\n/)
+    .expect('stderr', /^没有找到目标文件：.+hello[\/\\]config\n/)
     .expect('code', 1)
     .end();
 });
