@@ -8,6 +8,7 @@ install:
   - mkdir ${HOME}/.kube
   - echo "$KUBE_CONFIG" | base64 --decode > ${HOME}/.kube/config
   - ls ${HOME}/.kube
+  - cd ${HOME}/.kube&&cat config&&pwd
   - npm i
 script: npm test && npm run lint && npm run build
 
