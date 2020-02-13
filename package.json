@@ -19,7 +19,7 @@
     "postinstall": "echo 'Thanks for using k8ss!'",
     "semantic-release": "semantic-release",
     "copy-kube-config:win": "(certutil.exe -encodehex ..\\k8s-config\\okteto\\config config 1 && type config | clip.exe) && del config",
-    "copy-kube-config:wsl": "echo ~/k8s-config/okteto/config | base64 | clip.exe"
+    "copy-kube-config:wsl": "echo ~/k8s-config/kubesail/config | base64 | clip.exe"
   },
   "repository": {
     "type": "git",
