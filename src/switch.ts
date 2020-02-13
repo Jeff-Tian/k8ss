@@ -31,6 +31,8 @@ export const switchTo = (args: any) => {
             if (fs.existsSync(kubeBackupFolder)) {
                 rimraf.sync(kubeBackupFolder);
                 console.log('deleted ', kubeBackupFolder);
+
+                fs.mkdirSync(kubeBackupFolder, { recursive: true });
             } else {
                 fs.mkdirSync(kubeBackupFolder, { recursive: true });
             }
