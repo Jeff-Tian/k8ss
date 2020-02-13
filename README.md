@@ -50,3 +50,9 @@ k8ss s --namespace=stage
 
 - move the related `config` file into `~/.kube`
 - execute `kubectl config set-context $(kubectl config current-context) --namespace=<namespace>`
+
+## FAQ
+
+- `npm WARN checkPermissions Missing write access to /usr/local/nvm/versions/node/v12.13.1/lib/node_modules`
+  
+  Then you can install it locally by `npm i k8ss` and then run it as `./node_modules/.bin/k8ss switch --namespace=xxx`.
