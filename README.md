@@ -10,6 +10,7 @@
 
 ## Prerequisites
 
+- `nodejs` installed (tested in version 12)
 - `kubectl` installed
 - `k8s-config` folder in home directory, for example:
 
@@ -54,5 +55,5 @@ k8ss s --namespace=stage
 ## FAQ
 
 - `npm WARN checkPermissions Missing write access to /usr/local/nvm/versions/node/v12.13.1/lib/node_modules`
-  
+
   Then you can install it locally by `npm i k8ss` and then run it as `./node_modules/.bin/k8ss switch --namespace=xxx`.

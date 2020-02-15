@@ -37,7 +37,10 @@ export const switchTo = (args: any) => {
                 fs.mkdirSync(kubeBackupFolder, { recursive: true });
             }
 
-            fs.renameSync(path.resolve(kubeFolder, 'config'), path.resolve(kubeBackupFolder, 'config'));
+            const oldConfig = path.resolve(kubeFolder, 'config');
+            if (fs.existsSync(oldConfig)) {
+                fs.renameSync(oldConfig, path.resolve(kubeBackupFolder, 'config'));
+            }
         }
 
         fs.mkdirSync(kubeFolder, { recursive: true });
