@@ -43,8 +43,13 @@ export const switchTo = (args: any) => {
             }
         }
 
-        fs.mkdirSync(kubeFolder, { recursive: true });
-        console.log('created ', kubeFolder);
+        try {
+            fs.mkdirSync(kubeFolder, { recursive: true });
+            console.log('created ', kubeFolder);
+        } catch (ex) {
+            console.error(`creating ${kubeFolder} error, but it doesn't matter. `, ex);
+            console.log('will continue next steps...');
+        }
 
         const targetConfig = path.resolve(kubeFolder, 'config');
         fs.copyFileSync(sourceConfig, targetConfig);
@@ -54,16 +59,18 @@ export const switchTo = (args: any) => {
 
     console.log('will switching context...', namespace);
     try {
-        const currentContext = execSync('kubectl config current-context').toString('utf-8');
+        let currentContext = '';
+        currentContext = execSync('kubectl config current-context').toString('utf-8');
 
         console.log('current context = ', currentContext);
+
         const output = execSync(
             'kubectl config set-context ' + currentContext.replace('\n', '') + ' --namespace=' + namespace,
         );
         console.log('switched result: ');
         console.log(output.toString('utf-8'));
     } catch (ex) {
-        console.error(ex);
+        console.error(`switching to --cluster=${args.cluster} --namespace=${args.namespace} failed! `, ex);
 
         if (require.main === module) {
             process.exit(1);

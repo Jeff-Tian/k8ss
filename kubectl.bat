@@ -1,0 +1,1 @@
+echo 'This is `kubectl` mock for running `npm test` from windows'
