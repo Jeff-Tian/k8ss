@@ -49,8 +49,8 @@ const pollToken = async ({ device_code }: Record<string, string>): Promise<Recor
   } catch (ex) {
     if (ex.response && ex.response.status === 400) {
       if (ex.response?.data?.error === 'authorization_pending') {
-        console.log('等待 5 秒，再查……');
-        await sleep(5);
+        console.log('用户未授权。 等待 20 秒，再查……');
+        await sleep(20);
         return await pollToken({ device_code });
       }
 
@@ -97,7 +97,7 @@ export const login = async () => {
   console.log('codes = ', codes);
   await openBrowser(codes);
   console.log('\n\n\n\n等待输入授权码……');
-  await sleep(8);
+  await sleep(20);
   console.log('开始查询登录结果……');
   const res = await pollToken(codes);
   console.log('最终轮询结果是： ', res);
