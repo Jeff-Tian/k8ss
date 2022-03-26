@@ -3,12 +3,13 @@
 import { Argv } from 'yargs';
 import { list } from './list';
 import { switchTo } from './switch';
+import { login } from './login';
 
 // tslint:disable-next-line
 require('yargs')
   .usage('Usage: k8ss switch --cluster=your-cluster --namespace=your-namespace')
   .demandCommand(1)
-  .demandOption('namespace')
+  // .demandOption('namespace')
   .command(
     ['switch', 's'],
     'switch clusters and namespace',
@@ -23,11 +24,25 @@ require('yargs')
           describe: 'namespace to switch',
         });
     },
-    switchTo
-  ).command(['list', 'l'], 'list configured clusters', (yargs: Argv) => {
-    console.log('listing...');
-    console.log(list());
-    console.log('listing end.')
-  }, (args: any) => {
-    console.log('no effect code')
-  }).argv;
+    switchTo,
+  )
+  .command(
+    ['list', 'l'],
+    'list configured clusters',
+    (yargs: Argv) => {
+      console.log('listing...');
+      console.log(list());
+      console.log('listing end.');
+    },
+    (args: any) => {
+      console.log('no effect code');
+    },
+  )
+  .command(
+    ['login', 'login'],
+    'log in',
+    () => {
+      console.log('logging in...');
+    },
+    login,
+  ).argv;
