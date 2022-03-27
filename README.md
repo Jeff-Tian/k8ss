@@ -47,6 +47,11 @@ k8ss switch --cluster=hangzhou --namespace=test
 k8ss s --namespace=stage
 ```
 
+### Login
+```shell
+k8ss login
+```
+
 ## How
 
 - move the related `config` file into `~/.kube`

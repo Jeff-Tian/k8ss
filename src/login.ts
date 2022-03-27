@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
-import { exec } from 'child_process';
-import * as util from 'util';
+
+import shell from "shelljs";
 
 const getUserCodeAndDeviceCode = async () => {
   try {
@@ -23,10 +23,10 @@ const getUserCodeAndDeviceCode = async () => {
   }
 };
 
-const openBrowser = async ({ verification_uri, user_code }: Record<string, string>) => {
+const openBrowser = async ({ verification_uri, user_code, verification_uri_complete }: Record<string, string>) => {
   console.log('请打开浏览器并浏览至： ', verification_uri, ' , 然后在打开的页面中输入 ', user_code);
 
-  exec(`start ${verification_uri}`);
+  shell.exec(`open ${verification_uri_complete}`);
 };
 
 const pollToken = async ({ device_code }: Record<string, string>): Promise<Record<string, string>> => {
