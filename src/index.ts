@@ -2,8 +2,8 @@
 
 import { Argv } from 'yargs';
 import { list } from './list';
-import { switchTo } from './switch';
 import { login } from './login';
+import { switchTo } from './switch';
 
 // tslint:disable-next-line
 require('yargs')
