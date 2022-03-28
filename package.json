@@ -1,6 +1,6 @@
 {
   "name": "k8ss",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "k8s switcher",
   "main": "lib/index.js",
   "directories": {
