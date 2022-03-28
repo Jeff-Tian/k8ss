@@ -53,9 +53,15 @@ const pollToken = async ({device_code}: Record<string, string>): Promise<Record<
 
             const getErrorMessage = (deviceCode: string) => '查询无效，因为 ' + ex.response?.data?.error_description + '\n 传入的参数是： ' + JSON.stringify({device_code: deviceCode})
 
-            if (error === 'authorization_pending' || error === 'slow_down') {
-                console.log('用户未授权。 等待 5 秒，再查……');
+            if (error === 'authorization_pending') {
+                console.log(ex.response?.data, ' 未得到用户已授权的响应。 等待 5 秒，再查……');
                 await sleep(5);
+                return await pollToken({device_code});
+            }
+
+            if(error === 'slow_down'){
+                console.log(ex.response?.data, ' 未得到用户已授权的响应。 等待 10 秒，再查……');
+                await sleep(10);
                 return await pollToken({device_code});
             }
 
@@ -87,7 +93,7 @@ export const login = async () => {
     console.log('codes = ', codes);
     await openBrowser(codes);
     console.log('\n\n\n\n等待输入授权码……');
-    await sleep(20);
+    await sleep(10);
     console.log('开始查询登录结果……');
     const res = await pollToken(codes);
     console.log('最终轮询结果是： ', res);
