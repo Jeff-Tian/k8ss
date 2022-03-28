@@ -53,13 +53,13 @@ const pollToken = async ({device_code}: Record<string, string>): Promise<Record<
 
             const getErrorMessage = (deviceCode: string) => '查询无效，因为 ' + ex.response?.data?.error_description + '\n 传入的参数是： ' + JSON.stringify({device_code: deviceCode})
 
-            if (error === 'authorization_pending') {
-                console.log('用户未授权。 等待 20 秒，再查……');
-                await sleep(20);
+            if (error === 'authorization_pending' || error === 'slow_down') {
+                console.log('用户未授权。 等待 5 秒，再查……');
+                await sleep(5);
                 return await pollToken({device_code});
             }
 
-            if (error === 'slow_down' || error === 'invalid_grant') {
+            if (error === 'invalid_grant') {
                 const errorMessage = getErrorMessage(device_code);
 
                 console.error(errorMessage);
