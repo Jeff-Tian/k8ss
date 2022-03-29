@@ -2,8 +2,9 @@
 
 import { Argv } from 'yargs';
 import { list } from './list';
-import { login } from './login';
+import { loginByKeycloak } from './login/loginByKeycloak';
 import { switchTo } from './switch';
+import {login} from "./login";
 
 // tslint:disable-next-line
 require('yargs')
@@ -41,8 +42,11 @@ require('yargs')
   .command(
     ['login', 'login'],
     'log in',
-    () => {
-      console.log('logging in...');
+    (yargs: Argv) => {
+        yargs.option('idp', {
+            default: 'keycloak',
+            describe: 'which idp to use',
+        })
     },
     login,
   ).argv;

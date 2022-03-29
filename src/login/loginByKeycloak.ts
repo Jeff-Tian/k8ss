@@ -87,7 +87,7 @@ const pollToken = async ({device_code}: Record<string, string>): Promise<Record<
 
 const sleep = (seconds: number) => new Promise(resolve => setTimeout(resolve, seconds * 1000));
 
-export const login = async () => {
+export const loginByKeycloak = async () => {
     console.log('getting user code and device code...');
     const codes = await getUserCodeAndDeviceCode();
     console.log('codes = ', codes);
