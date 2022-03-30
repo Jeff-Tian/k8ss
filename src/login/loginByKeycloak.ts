@@ -1,7 +1,7 @@
 import axios from 'axios';
+import qrcode from "qrcode-terminal";
 import qs from 'qs';
 import shell from "shelljs";
-import qrcode from "qrcode-terminal";
 
 const getUserCodeAndDeviceCode = async () => {
     try {

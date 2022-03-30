@@ -5,13 +5,13 @@ export interface ILoginArgs {
 }
 
 export class NotSupportedError implements Error {
+
+    public message: string;
+    public name: string;
     constructor(s: string) {
         this.name = NotSupportedError.name
         this.message = s;
     }
-
-    message: string;
-    name: string;
 }
 
 export const login = async (args: ILoginArgs)=>{
