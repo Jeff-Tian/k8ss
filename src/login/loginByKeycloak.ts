@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
-
 import shell from "shelljs";
+import qrcode from "qrcode-terminal";
 
 const getUserCodeAndDeviceCode = async () => {
     try {
@@ -26,6 +26,8 @@ const getUserCodeAndDeviceCode = async () => {
 
 const openBrowser = async ({verification_uri, user_code, verification_uri_complete}: Record<string, string>) => {
     console.log('请打开浏览器并浏览至： ', verification_uri, ' , 然后在打开的页面中输入 ', user_code);
+
+    qrcode.generate(verification_uri_complete, {small: true}, console.log);
 
     shell.exec(`open ${verification_uri_complete}`);
 };
