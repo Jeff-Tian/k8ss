@@ -1,4 +1,5 @@
 import {loginByKeycloak} from "./loginByKeycloak";
+import {loginByIdentityServer} from "./loginByIdentityServer";
 
 export interface ILoginArgs {
   idp: string;
@@ -17,6 +18,10 @@ export class NotSupportedError implements Error {
 export const login = async (args: ILoginArgs)=>{
     if(args.idp === 'keycloak') {
         return loginByKeycloak()
+    }
+
+    if(args.idp === 'id6') {
+        return loginByIdentityServer()
     }
 
     throw new NotSupportedError(`Login by ${args.idp} is not supported`);

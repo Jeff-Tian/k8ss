@@ -44,7 +44,7 @@ require('yargs')
     'log in',
     (yargs: Argv) => {
         yargs.option('idp', {
-            default: 'keycloak',
+            default: 'id6',
             describe: 'which idp to use',
         })
     },
