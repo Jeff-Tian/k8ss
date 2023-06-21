@@ -42,7 +42,7 @@
     "qs": "^6.10.3",
     "rimraf": "^2.6.3",
     "shelljs": "^0.8.3",
-    "yargs": "^13.2.4"
+    "yargs": "^13.3.0"
   },
   "devDependencies": {
     "@semantic-release/git": "^8.0.0",
