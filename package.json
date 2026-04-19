@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/Jeff-Tian/k8ss#readme",
   "dependencies": {
-    "axios": "^0.26.1",
+    "axios": "^0.31.0",
     "qrcode-terminal": "^0.12.0",
     "qs": "^6.10.3",
     "rimraf": "^2.7.1",
