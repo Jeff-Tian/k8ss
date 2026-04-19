@@ -7,7 +7,7 @@ const getUserCodeAndDeviceCode = async () => {
     try {
         const { data } = await axios({
             method: 'post',
-            url: 'https://keycloak.jiwai.win/auth/realms/UniHeart/protocol/openid-connect/auth/device',
+            url: 'https://keycloak.jiwai.win/realms/UniHeart/protocol/openid-connect/auth/device',
             // @ts-ignore
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -38,7 +38,7 @@ const pollToken = async ({ device_code }: any): Promise<any> => {
     try {
         const { data } = await axios({
             method: 'post',
-            url: 'https://keycloak.jiwai.win/auth/realms/UniHeart/protocol/openid-connect/token',
+            url: 'https://keycloak.jiwai.win/realms/UniHeart/protocol/openid-connect/token',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
