@@ -1,0 +1,7 @@
+node_modules/
+lib/
+.vscode/chrome/
+*.log
+.DS_Store
+coverage/
+.nyc_output/

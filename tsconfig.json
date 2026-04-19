@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "lib": ["es2017", "esnext.asynciterable"],
+        "outDir": "./lib",
+        "rootDir": "./src",
+        "strict": false,
+        "noImplicitAny": false,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "declaration": true,
+        "sourceMap": false,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules", "lib", "__mocks__", "**/*.spec.ts", "**/*.test.ts"]
+}

@@ -1,0 +1,12 @@
+{
+    "extends": ["tslint:recommended", "tslint-config-prettier", "tslint-plugin-prettier", "tslint-sonarts"],
+    "rules": {
+        "prettier": true,
+        "no-console": false,
+        "object-literal-sort-keys": false,
+        "interface-name": [true, "always-prefix"],
+        "variable-name": {
+            "options": ["ban-keywords", "check-format", "allow-leading-underscore", "allow-snake-case"]
+        }
+    }
+}
